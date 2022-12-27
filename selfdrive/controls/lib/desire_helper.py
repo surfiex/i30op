@@ -40,6 +40,12 @@ class DesireHelper:
     self.prev_one_blinker = False
     self.desire = log.LateralPlan.Desire.none
 
+    #차선변경 설정 추가
+    self.lane_change_enabled = Params().get_bool('LaneChangeEnabled')
+    self.auto_lane_change_enabled = Params().get_bool('AutoLaneChangeEnabled')
+    self.auto_lane_change_timer = 0.0
+    self.prev_torque_applied = False
+
   def update(self, carstate, lateral_active, lane_change_prob):
     v_ego = carstate.vEgo
     one_blinker = carstate.leftBlinker != carstate.rightBlinker
